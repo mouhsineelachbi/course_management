@@ -1,0 +1,77 @@
+<div class="w-100 d-flex justify-content-center">
+  <form
+    [formGroup]="registerForm"
+    (ngSubmit)="signup()"
+    class="w-25 px-5 py-5 shadow mt-5"
+  >
+    <div class="w-100 d-flex justify-content-center">
+      <img class="img-fluid logo" src="assets/logo.png" />
+    </div>
+    <div class="my-3">
+      <label for="email" class="form-label">Email address : </label>
+      <input
+        type="email"
+        class="form-control"
+        placeholder="Email..."
+        formControlName="email"
+      />
+    </div>
+    <div
+      *ngIf="
+        registerForm.controls['email'].invalid &&
+        (registerForm.controls['email'].dirty ||
+          registerForm.controls['email'].touched)
+      "
+      class="alert alert-danger"
+    >
+      <div *ngIf="registerForm.controls['email'].errors?.['required']">
+        Email is required.
+      </div>
+    </div>
+
+    <div class="my-3">
+      <label for="username" class="form-label">Username : </label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Username..."
+        formControlName="username"
+      />
+    </div>
+    <div
+      *ngIf="
+        registerForm.controls['username'].invalid &&
+        (registerForm.controls['username'].dirty ||
+          registerForm.controls['username'].touched)
+      "
+      class="alert alert-danger"
+    >
+      <div *ngIf="registerForm.controls['username'].errors?.['required']">
+        Username is required.
+      </div>
+    </div>
+
+    <div class="my-3">
+      <label for="password" class="form-label">Password : </label>
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Password..."
+        formControlName="password"
+      />
+    </div>
+    <div
+      *ngIf="
+        registerForm.controls['password'].invalid &&
+        (registerForm.controls['password'].dirty ||
+          registerForm.controls['password'].touched)
+      "
+      class="alert alert-danger"
+    >
+      <div *ngIf="registerForm.controls['password'].errors?.['pattern']">
+        Invalid password
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Sign Up</button>
+  </form>
+</div>

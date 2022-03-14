@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/models/user.model';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +26,14 @@ export class LoginComponent implements OnInit {
       headers: httpHeaders,
     };
     this.http
-      .post('http://localhost:3000/auth/login', this.user, options).subscribe(data => console.log(data), error => console.log(error));
+      .post('http://localhost:3000/auth/login', this.user, options)
+      .subscribe(
+        (data) => {
+          console.log(data);
+          
+        
+        },
+        (error) => console.log(error)
+      );
   }
 }
