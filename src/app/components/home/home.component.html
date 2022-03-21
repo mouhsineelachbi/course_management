@@ -17,7 +17,14 @@
           <li class="nav-item">
             <a href="#" class="nav-link align-middle px-0 text-black">
               <i class="fs-4 bi-house"></i>
-              <span class="ms-1 d-none d-sm-inline">Students</span>
+              <br />
+              <a
+                [routerLink]="[
+                  '/home',
+                  { outlets: { management: ['students'] } }
+                ]"
+                ><span class="ms-1 d-none d-sm-inline">Students</span></a
+              >
             </a>
           </li>
           <li class="nav-item">
@@ -37,7 +44,8 @@
     </div>
     <div class="col py-3">
       <div class="d-flex flex-column justify-content-center">
-        <router-outlet></router-outlet>
+        <router-outlet name="management"></router-outlet>
+        <!-- <router-outlet></router-outlet> -->
       </div>
     </div>
   </div>

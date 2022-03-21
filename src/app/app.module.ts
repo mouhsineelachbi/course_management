@@ -11,6 +11,20 @@ import { StudentItemsComponent } from './components/student/student-items/studen
 import { SignupComponent } from './components/signup/signup.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {TableModule} from 'primeng/table';
+import {ToastModule} from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import {ToolbarModule} from 'primeng/toolbar';
+import {FileUploadModule} from 'primeng/fileupload';
+import {DialogModule} from 'primeng/dialog';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
+import {DropdownModule} from 'primeng/dropdown';
+import {RatingModule} from 'primeng/rating';
+import {RippleModule} from 'primeng/ripple';
+import {ButtonModule} from 'primeng/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {InputTextModule} from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -20,7 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     StudentItemsComponent,
     SignupComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,8 +42,21 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    TableModule,
+    ToastModule,
+    ToolbarModule,
+    FileUploadModule,
+    DialogModule,
+    ConfirmDialogModule,
+    DropdownModule,
+    RatingModule,
+    RippleModule,
+    ButtonModule,
+    BrowserAnimationsModule,
+    InputTextModule
+    
   ],
-  providers: [],
+  providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

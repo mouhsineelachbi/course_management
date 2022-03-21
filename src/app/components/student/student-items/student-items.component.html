@@ -1,1 +1,211 @@
-<p>student-items works!</p>
+<p-toast></p-toast>
+
+<div class="card">
+  <p-toolbar styleClass="mb-4">
+    <ng-template pTemplate="left">
+      <button
+        pButton
+        pRipple
+        label="New"
+        icon="pi pi-plus"
+        class="p-button-success mx-1"
+        (click)="openNew()"
+      ></button>
+      <button
+        pButton
+        pRipple
+        icon="pi pi-trash"
+        class="p-button-danger mx-1"
+        (click)="deleteSelectedStudents()"
+        [disabled]="!selectedStudents || !selectedStudents.length"
+      ></button>
+    </ng-template>
+
+    <ng-template pTemplate="right">
+      <p-fileUpload
+        mode="basic"
+        accept="image/*"
+        [maxFileSize]="1000000"
+        label="Import"
+        chooseLabel="Import"
+        class="mx-1 inline-block"
+      ></p-fileUpload>
+      <button
+        pButton
+        pRipple
+        label="Export"
+        icon="pi pi-upload"
+        class="p-button-help"
+      ></button>
+    </ng-template>
+  </p-toolbar>
+
+  <p-table
+    [value]="students"
+    [rows]="10"
+    [paginator]="true"
+    [globalFilterFields]="['id', 'first_name', 'last_name', 'age', 'cne']"
+    responsiveLayout="scroll"
+    [(selection)]="selectedStudents"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+    (onLazyLoad)="loadLazy($event)"
+    #dt
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <h5 class="m-0">Manage Student</h5>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <!-- <input
+            pInputText
+            type="text"
+            placeholder="Search..."
+            id="filterText"
+            (input)="
+              dt.filterGlobal($event.target!.value, 'contains')
+            "
+          /> -->
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 3rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th pSortableColumn="first_name">
+          First Name <p-sortIcon field="first_name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="last_name">
+          Last Name <p-sortIcon field="last_name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="age">Age <p-sortIcon field="age"></p-sortIcon></th>
+        <th pSortableColumn="cne">CNE <p-sortIcon field="cne"></p-sortIcon></th>
+        <th>Operations</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-student>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="student"></p-tableCheckbox>
+        </td>
+        <td>{{ student.first_name }}</td>
+        <td>
+          {{ student.last_name }}
+        </td>
+        <td>
+          {{ student.age }}
+        </td>
+        <td>
+          {{ student.cne }}
+        </td>
+        <td>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-success mx-1"
+            (click)="editStudent(student)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-warning"
+            (click)="deleteStudent(student)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        In total there are {{ students ? students.length : 0 }} products.
+      </div>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-dialog
+  [(visible)]="studentDialog"
+  [style]="{ width: '450px', height: '600px' }"
+  header="Student Details"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <div class="field mt-1">
+      <label for="first_name" class="my-2">First Name : </label>
+      <input
+        type="text"
+        class="my-2"
+        pInputText
+        id="first_name"
+        [(ngModel)]="student.first_name"
+        required
+        autofocus
+      />
+      <small class="p-error my-5" *ngIf="submitted && !student.first_name"
+        >Name is required.</small
+      >
+    </div>
+    <div class="field mt-1">
+      <label for="description" class="my-2">Last Name :</label>
+      <input
+        type="text"
+        pInputText
+        id="last_name"
+        [(ngModel)]="student.last_name"
+      />
+    </div>
+    <div class="field mt-1">
+      <label for="age" class="my-2">Age : </label>
+      <input
+        type="number"
+        min="18"
+        class="my-2"
+        pInputText
+        id="cne"
+        [(ngModel)]="student.age"
+        required
+        autofocus
+      />
+    </div>
+
+    <div class="field mt-1">
+      <label for="cne" class="my-2">CNE :</label>
+      <input
+        type="text"
+        class="my-2"
+        pInputText
+        id="cne"
+        [(ngModel)]="student.cne"
+        required
+        autofocus
+      />
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Cancel"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="hideDialog()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Save"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="saveStudent()"
+    ></button>
+  </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

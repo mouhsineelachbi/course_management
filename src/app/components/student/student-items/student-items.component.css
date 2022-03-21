@@ -1,0 +1,13 @@
+.students-table .table thead tr th {
+    padding: 20px;
+    color: white;
+}
+
+
+.students-table {
+    background-color: blue;
+}
+
+.students-table .table {
+    display: block;
+}
