@@ -11,32 +11,52 @@
           <span class="fs-5 d-none d-sm-inline">Menu</span>
         </a>
         <ul
-          class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+          class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100"
           id="menu"
         >
           <li class="nav-item">
             <a href="#" class="nav-link align-middle px-0 text-black">
-              <i class="fs-4 bi-house"></i>
-              <br />
+              <!-- <i class="pi pi-user-minus fs-4 bi-house"></i> -->
               <a
                 [routerLink]="[
                   '/home',
                   { outlets: { management: ['students'] } }
                 ]"
-                ><span class="ms-1 d-none d-sm-inline">Students</span></a
+                class="d-flex nav-link align-middle px-3 text-black"
+              >
+                <div class="w-25">
+                  <i class="pi pi-user-minus fs-4 bi-house"></i>
+                </div>
+                <span class="ms-1 d-none d-sm-inline ps-4 mb-3"
+                  >Students</span
+                ></a
               >
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link align-middle px-0 text-black">
-              <i class="fs-4 bi-house"></i>
-              <span class="ms-1 d-none d-sm-inline">Professors</span>
+            <a
+              [routerLink]="[
+                '/home',
+                { outlets: { management: ['students'] } }
+              ]"
+              class="d-flex nav-link align-middle px-3 text-black"
+            >
+              <div class="w-25">
+                <i class="pi pi-user-minus fs-4 bi-house mr-4"></i>
+              </div>
+              <span class="ms-1 d-none d-sm-inline ps-4 mb-3">Professors</span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link align-middle px-0 text-black">
-              <i class="fs-4 bi-house"></i>
-              <span class="ms-1 d-none d-sm-inline">Courses</span>
+            <a
+              [routerLink]="[
+                '/home',
+                { outlets: { management: ['students'] } }
+              ]"
+              class="d-flex nav-link align-middle px-3 text-black"
+            >
+              <div class="w-25"><i class="pi pi-book fs-4 bi-house"></i></div>
+              <span class="ms-1 d-none d-sm-inline ps-4 mb-3">Courses</span>
             </a>
           </li>
         </ul>
