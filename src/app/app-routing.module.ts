@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SignupComponent } from './components/signup/signup.component';
 import { StudentItemsComponent } from './components/student/student-items/student-items.component';
+import { ProfessorComponent } from './components/professor/professor.component';
 
 const routes: Routes = [
 
@@ -22,6 +23,11 @@ const routes: Routes = [
         path: 'students',
         component: StudentItemsComponent,
         outlet: "management"
+      },
+      {
+        path: 'professors',
+        component: ProfessorComponent,
+        outlet: 'management'
       }
     ]
   },

@@ -25,6 +25,7 @@ import {RippleModule} from 'primeng/ripple';
 import {ButtonModule} from 'primeng/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {InputTextModule} from 'primeng/inputtext';
+import { ProfessorComponent } from './components/professor/professor.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {InputTextModule} from 'primeng/inputtext';
     StudentItemsComponent,
     SignupComponent,
     FooterComponent,
+    ProfessorComponent,
   ],
   imports: [
     BrowserModule,
