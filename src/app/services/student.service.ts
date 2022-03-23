@@ -16,6 +16,10 @@ export class StudentService {
     return this.httpClient.get(this.url).toPromise().then(res => <Student[]> res)
   }
 
+  getLastStudent(): Observable<Student>{
+    return this.httpClient.get<Student>(this.url+'/finalInserted');
+  }
+
   addStudent(student: Student){
     return this.httpClient.post(this.url, student).toPromise().then(res => console.log(res))
   }

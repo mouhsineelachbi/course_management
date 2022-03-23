@@ -81,13 +81,20 @@ export class StudentItemsComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.students = this.students.filter(val => !this.selectedStudents.includes(val));
+        this.students = this.students.filter(
+          (val) => !this.selectedStudents.includes(val)
+        );
         this.studentService.deleteStudents(this.selectedStudents);
         this.selectedStudents = [];
         this.student = {};
-        this.messageService.add({severity:'success', summary: 'Successful', detail: 'Students Deleted', life: 3000});
-      }
-    })
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'Students Deleted',
+          life: 3000,
+        });
+      },
+    });
   }
   editStudent(student: Student) {
     this.student = { ...student };
@@ -106,10 +113,12 @@ export class StudentItemsComponent implements OnInit {
           detail: 'Student Deleted',
           life: 3000,
         });
-        let student_to_delete = []
-        student_to_delete.push({id: student.id})
-        student && student.id && this.studentService.deleteStudents(student_to_delete);
-        this.student = {}
+        let student_to_delete = [];
+        student_to_delete.push({ id: student.id });
+        student &&
+          student.id &&
+          this.studentService.deleteStudents(student_to_delete);
+        this.student = {};
       },
     });
   }
@@ -129,17 +138,17 @@ export class StudentItemsComponent implements OnInit {
     } else {
       this.studentService
         .addStudent(this.student)
-        .then((data) => console.log('this is me'));
+        .then((data) => {
+          this.studentService.getLastStudent().subscribe((data) => {
+            this.students.push(data);
+          });
+        });
       this.messageService.add({
         severity: 'success',
         summary: 'Successful',
         detail: 'Student Created',
         life: 3000,
       });
-      const length = this.students?.length - 1;
-      const lastId = this.students[length]!.id;
-      if (lastId) this.student.id = lastId + 1;
-      this.students.push(this.student);
     }
     this.student = {};
     this.studentDialog = false;
