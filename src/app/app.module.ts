@@ -26,6 +26,15 @@ import {ButtonModule} from 'primeng/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {InputTextModule} from 'primeng/inputtext';
 import { ProfessorComponent } from './components/professor/professor.component';
+import { APP_INITIALIZER } from '@angular/core';
+import { AppConfigService } from './services/app.service';
+
+
+
+export function initConfig(appConfig: AppConfigService) {
+  return () => appConfig.loadConfig();
+}
+
 
 @NgModule({
   declarations: [
@@ -58,7 +67,12 @@ import { ProfessorComponent } from './components/professor/professor.component';
     InputTextModule
     
   ],
-  providers: [MessageService, ConfirmationService],
+  providers: [MessageService, ConfirmationService, {
+    provide: APP_INITIALIZER,
+    useFactory: initConfig,
+    deps: [AppConfigService],
+    multi: true,
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
