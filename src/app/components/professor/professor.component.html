@@ -8,16 +8,15 @@
         pRipple
         label="New"
         icon="pi pi-plus"
-        class="p-button-success mr-2"
+        class="p-button-success mx-2"
         (click)="openNew()"
       ></button>
       <button
         pButton
         pRipple
-        label="Delete"
         icon="pi pi-trash"
         class="p-button-danger"
-        (click)="deleteSelectedProducts()"
+        (click)="deleteSelectedProfessors()"
         [disabled]="!selectedProfessors || !selectedProfessors.length"
       ></button>
     </ng-template>
@@ -29,7 +28,7 @@
         [maxFileSize]="1000000"
         label="Import"
         chooseLabel="Import"
-        class="mr-2 inline-block"
+        class="mx-2 inline-block"
       ></p-fileUpload>
       <button
         pButton
@@ -56,7 +55,7 @@
   >
     <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
-        <h5 class="m-0">Manage Products</h5>
+        <h5 class="m-0">Manage Professors</h5>
         <!-- <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
           <input
@@ -73,21 +72,15 @@
         <th style="width: 3rem">
           <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
         </th>
-        <th pSortableColumn="name">
-          Name <p-sortIcon field="name"></p-sortIcon>
+        <th pSortableColumn="first_name">
+          First Name <p-sortIcon field="first_name"></p-sortIcon>
         </th>
-        <th>Image</th>
-        <th pSortableColumn="price">
-          Price <p-sortIcon field="price"></p-sortIcon>
+        <th pSortableColumn="last_name">
+          Last Name <p-sortIcon field="last_name"></p-sortIcon>
         </th>
-        <th pSortableColumn="category">
-          Category <p-sortIcon field="category"></p-sortIcon>
-        </th>
-        <th pSortableColumn="rating">
-          Reviews <p-sortIcon field="rating"></p-sortIcon>
-        </th>
-        <th pSortableColumn="inventoryStatus">
-          Status <p-sortIcon field="inventoryStatus"></p-sortIcon>
+        <th pSortableColumn="age">Age <p-sortIcon field="age"></p-sortIcon></th>
+        <th pSortableColumn="grade">
+          Grade <p-sortIcon field="grade"></p-sortIcon>
         </th>
         <th></th>
       </tr>
@@ -106,7 +99,7 @@
             pButton
             pRipple
             icon="pi pi-pencil"
-            class="p-button-rounded p-button-success mr-2"
+            class="p-button-rounded p-button-success mx-2"
             (click)="editProfessor(professor)"
           ></button>
           <button
@@ -121,7 +114,7 @@
     </ng-template>
     <ng-template pTemplate="summary">
       <div class="flex align-items-center justify-content-between">
-        In total there are {{ professors ? professors.length : 0 }} products.
+        In total there are {{ professors ? professors.length : 0 }} professors.
       </div>
     </ng-template>
   </p-table>
@@ -130,13 +123,13 @@
 <p-dialog
   [(visible)]="professorDialog"
   [style]="{ width: '450px' }"
-  header="Product Details"
+  header="Professor Details"
   [modal]="true"
   styleClass="p-fluid"
 >
   <ng-template pTemplate="content">
     <div class="field">
-      <label for="name">First Name</label>
+      <label for="first_name" class="my-2">First Name : </label>
       <input
         type="text"
         pInputText
@@ -150,37 +143,21 @@
       >
     </div>
     <div class="field">
-      <label for="description">Last Name</label>
-      <textarea
-        id="description"
-        pInputTextarea
+      <label for="last_name" class="my-2">Last Name : </label>
+      <input
+        id="last_name"
+        pInputText
         [(ngModel)]="professor.last_name"
         required
-        rows="3"
-        cols="20"
-      ></textarea>
+      />
     </div>
     <div class="field">
-      <label for="description">Grade</label>
-      <textarea
-        id="description"
-        pInputTextarea
-        [(ngModel)]="professor.grade"
-        required
-        rows="3"
-        cols="20"
-      ></textarea>
+      <label for="grade" class="my-2">Grade : </label>
+      <input id="grade" pInputText [(ngModel)]="professor.grade" required />
     </div>
     <div class="field">
-      <label for="description">Age</label>
-      <textarea
-        id="description"
-        pInputTextarea
-        [(ngModel)]="professor.age"
-        required
-        rows="3"
-        cols="20"
-      ></textarea>
+      <label for="age" class="my-2">Age : </label>
+      <input id="age" pInputText [(ngModel)]="professor.age" required />
     </div>
   </ng-template>
 

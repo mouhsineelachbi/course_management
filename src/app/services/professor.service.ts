@@ -1,40 +1,45 @@
+import { Observable } from 'rxjs';
 import { Professor } from './../models/professor.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AppConfigService } from './app.service';
+import { AppConfig, AppConfigService } from './app.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfessorService {
 
-  config: AppConfig;
+  config: string;
   professorUrl: string
 
-  constructor(private http: HttpClient, private config: AppConfigService) { 
-    this.config = config.getConfig().apiUrl;
+  constructor(private http: HttpClient, private configs: AppConfigService) { 
+    this.config = configs.getConfig().apiUrl;
     this.professorUrl = this.config+'/professor'
   }
 
-  getProfessors(){
-    return this.http.get(this.professorUrl).toPromise()
+  getProfessors(): Observable<Professor[]>{
+    return this.http.get<Professor[]>(this.professorUrl)
   }
 
-  addProfessor(professor: Professor){
-    return this.http.post(this.professorUrl, professor).toPromise();
+  getLastInsertedProfessor(): Observable<Professor>{
+    return this.http.get<Professor>(this.professorUrl+'/finalInserted')
   }
 
-  deleteProfesssor(id: number){
+  addProfessor(professor: Professor): Observable<Professor>{
+    return this.http.post<Professor>(this.professorUrl, professor)
+  }
+
+  deleteProfessor(id: number){
     const prof = new Professor();
     prof.id = id;
-    return this.httpClient.request('delete', this.professorUrl+'/multiple', { body: prof}).toPromise().then(res => console.log("deleted"));
+    return this.http.request('delete', this.professorUrl+'/multiple', { body: prof})
   }
 
   updateProfessor(profesor: Professor){
-    return this.httpClient.patch(this.professorUrl+'/'+profesor.id, profesor).toPromise().then(res => console.log('updated'));
+    return this.http.patch(this.professorUrl+'/'+profesor.id, profesor)
   }
 
-  deleteProfessor(professors: Professor[]){
-    return this.httpClient.request('delete', this.professorUrl+'/multiple', { body: professors }).toPromise().then(res => console.log("deleted"));
+  deleteProfessors(professors: Professor[]){
+    return this.http.request('delete', this.professorUrl+'/multiple', { body: professors })
   }
 }
