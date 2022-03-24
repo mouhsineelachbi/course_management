@@ -1,3 +1,5 @@
+import { Course } from "./course.model";
+
 export class Student {
     id?: number;
 
@@ -8,4 +10,6 @@ export class Student {
     age?: number;
     
     cne?: string;
+
+    courses?: Course[]
 }

@@ -1,8 +1,10 @@
+import { CourseService } from './../../../services/course.service';
 import { Component, OnInit } from '@angular/core';
 import { Student } from 'src/app/models/student.model';
 import { StudentService } from 'src/app/services/student.service';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
+import { Course } from 'src/app/models/course.model';
 
 @Component({
   selector: 'app-student-items',
@@ -17,9 +19,11 @@ export class StudentItemsComponent implements OnInit {
   submitted!: boolean;
   statuses!: any[];
   ageArray: any;
+  courses: any;
 
   constructor(
     private studentService: StudentService,
+    private courseService: CourseService,
     private messageService: MessageService,
     private primengConfig: PrimeNGConfig,
     private confirmationService: ConfirmationService
@@ -30,6 +34,7 @@ export class StudentItemsComponent implements OnInit {
     this.studentService.getStudents().then((data) => {
       this.students = data;
     });
+    this.courseService.getCourses().subscribe((courses)=> this.courses = courses)
     this.fillAgeArray();
   }
 

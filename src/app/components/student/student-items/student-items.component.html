@@ -131,6 +131,7 @@
 <p-dialog
   [(visible)]="studentDialog"
   [style]="{ width: '450px', height: '600px' }"
+  [contentStyle]="{ overflow: 'visible' }"
   header="Student Details"
   [modal]="true"
   styleClass="p-fluid"
@@ -185,6 +186,14 @@
         required
         autofocus
       />
+    </div>
+    <div class="field">
+      <label for="course">Courses : </label>
+      <p-multiSelect
+        [options]="courses"
+        [(ngModel)]="student.courses"
+        optionLabel="name"
+      ></p-multiSelect>
     </div>
   </ng-template>
 
