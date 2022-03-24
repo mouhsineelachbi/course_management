@@ -121,6 +121,7 @@
 <p-dialog
   [(visible)]="courseDialog"
   [style]="{ width: '450px', height: '570px' }"
+  [contentStyle]="{ overflow: 'visible' }"
   header="Course Details"
   [modal]="true"
   styleClass="p-fluid"
@@ -148,8 +149,6 @@
         [(ngModel)]="course.professor"
         optionLabel="first_name"
         class="course-professor-dropdown"
-        [baseZIndex]="100"
-        [virtualScroll]="true"
       ></p-dropdown>
     </div>
     <div class="field">
