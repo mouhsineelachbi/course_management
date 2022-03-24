@@ -1,0 +1,7 @@
+.diag-template.course-professor-dropdown {
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: 100px;
+    z-index: 100;
+    background-color: red;
+}

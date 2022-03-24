@@ -28,6 +28,8 @@ import {InputTextModule} from 'primeng/inputtext';
 import { ProfessorComponent } from './components/professor/professor.component';
 import { APP_INITIALIZER } from '@angular/core';
 import { AppConfigService } from './services/app.service';
+import { CourseComponent } from './components/course/course.component';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 
 
@@ -46,6 +48,7 @@ export function initConfig(appConfig: AppConfigService) {
     SignupComponent,
     FooterComponent,
     ProfessorComponent,
+    CourseComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,8 @@ export function initConfig(appConfig: AppConfigService) {
     RippleModule,
     ButtonModule,
     BrowserAnimationsModule,
-    InputTextModule
+    InputTextModule,
+    MultiSelectModule
     
   ],
   providers: [MessageService, ConfirmationService, {

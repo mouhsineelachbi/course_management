@@ -1,0 +1,185 @@
+<p-toast></p-toast>
+
+<div class="card">
+  <p-toolbar styleClass="mb-4">
+    <ng-template pTemplate="left">
+      <button
+        pButton
+        pRipple
+        label="New"
+        icon="pi pi-plus"
+        class="p-button-success mx-2"
+        (click)="openNew()"
+      ></button>
+      <button
+        pButton
+        pRipple
+        icon="pi pi-trash"
+        class="p-button-danger"
+        (click)="deleteSelectedCourses()"
+        [disabled]="!selectedCourses || !selectedCourses.length"
+      ></button>
+    </ng-template>
+
+    <ng-template pTemplate="right">
+      <p-fileUpload
+        mode="basic"
+        accept="image/*"
+        [maxFileSize]="1000000"
+        label="Import"
+        chooseLabel="Import"
+        class="mx-2 inline-block"
+      ></p-fileUpload>
+      <button
+        pButton
+        pRipple
+        label="Export"
+        icon="pi pi-upload"
+        class="p-button-help"
+      ></button>
+    </ng-template>
+  </p-toolbar>
+
+  <p-table
+    #dt
+    [value]="courses"
+    [rows]="10"
+    [paginator]="true"
+    [globalFilterFields]="['name', 'duration', 'language']"
+    responsiveLayout="scroll"
+    [(selection)]="selectedCourses"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <h5 class="m-0">Manage Courses</h5>
+        <!-- <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="dt.filterGlobal($event.target.value, 'contains')"
+            placeholder="Search..."
+          />
+        </span> -->
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 3rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th pSortableColumn="name">
+          Name <p-sortIcon field="name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="duration">
+          Duation <p-sortIcon field="duration"></p-sortIcon>
+        </th>
+        <th pSortableColumn="language">
+          Language <p-sortIcon field="language"></p-sortIcon>
+        </th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-course>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="course"></p-tableCheckbox>
+        </td>
+        <td>{{ course.name }}</td>
+        <td>{{ course.duration }}</td>
+        <td>{{ course.language }}</td>
+        <td>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-success mx-2"
+            (click)="editCourse(course)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-warning"
+            (click)="deleteCourse(course)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        In total there are {{ courses ? courses.length : 0 }} courses.
+      </div>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-dialog
+  [(visible)]="courseDialog"
+  [style]="{ width: '450px', height: '570px' }"
+  header="Course Details"
+  [modal]="true"
+  styleClass="p-fluid"
+  class="course-dialog"
+>
+  <ng-template pTemplate="content" class="diag-template">
+    <div class="field">
+      <label for="name" class="my-2">Name : </label>
+      <input
+        type="text"
+        pInputText
+        id="name"
+        [(ngModel)]="course.name"
+        required
+        autofocus
+      />
+      <small class="p-error" *ngIf="submitted && !course.name"
+        >Name is required.</small
+      >
+    </div>
+    <div class="field course-professor-list">
+      <label for="professor" class="my-2">Professor : </label>
+      <p-dropdown
+        [options]="professors"
+        [(ngModel)]="course.professor"
+        optionLabel="first_name"
+        class="course-professor-dropdown"
+        [baseZIndex]="100"
+        [virtualScroll]="true"
+      ></p-dropdown>
+    </div>
+    <div class="field">
+      <label for="last_name" class="my-2">Duration : </label>
+      <input id="last_name" pInputText [(ngModel)]="course.duration" required />
+    </div>
+    <div class="field">
+      <label for="grade" class="my-2">Language : </label>
+      <input id="grade" pInputText [(ngModel)]="course.language" required />
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Cancel"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="hideDialog()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Save"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="saveCourse()"
+    ></button>
+  </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
