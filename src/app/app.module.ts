@@ -30,6 +30,7 @@ import { APP_INITIALIZER } from '@angular/core';
 import { AppConfigService } from './services/app.service';
 import { CourseComponent } from './components/course/course.component';
 import {MultiSelectModule} from 'primeng/multiselect';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 
@@ -49,6 +50,7 @@ export function initConfig(appConfig: AppConfigService) {
     FooterComponent,
     ProfessorComponent,
     CourseComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
