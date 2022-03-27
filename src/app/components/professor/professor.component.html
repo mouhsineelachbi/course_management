@@ -137,6 +137,7 @@
         [(ngModel)]="professor.first_name"
         required
         autofocus
+        placeholder="Professor first name"
       />
       <small class="p-error" *ngIf="submitted && !professor.first_name"
         >Name is required.</small
@@ -149,15 +150,37 @@
         pInputText
         [(ngModel)]="professor.last_name"
         required
+        placeholder="Professor last name"
       />
     </div>
     <div class="field">
       <label for="grade" class="my-2">Grade : </label>
-      <input id="grade" pInputText [(ngModel)]="professor.grade" required />
+      <input
+        id="grade"
+        pInputText
+        [(ngModel)]="professor.grade"
+        required
+        placeholder="Professor grade"
+      />
     </div>
     <div class="field">
       <label for="age" class="my-2">Age : </label>
-      <input id="age" pInputText [(ngModel)]="professor.age" required />
+      <input
+        id="age"
+        pInputText
+        [(ngModel)]="professor.age"
+        required
+        placeholder="Professor age"
+      />
+    </div>
+    <div class="field">
+      <label for="course" class="my-2">Courses : </label>
+      <p-multiSelect
+        [options]="courses"
+        [(ngModel)]="professor.courses"
+        optionLabel="name"
+        placeholder="Select courses"
+      ></p-multiSelect>
     </div>
   </ng-template>
 

@@ -141,12 +141,12 @@
       <label for="first_name" class="my-2">First Name : </label>
       <input
         type="text"
-        class="my-2"
         pInputText
         id="first_name"
         [(ngModel)]="student.first_name"
         required
         autofocus
+        placeholder="Student first name"
       />
       <small class="p-error my-5" *ngIf="submitted && !student.first_name"
         >Name is required.</small
@@ -159,6 +159,7 @@
         pInputText
         id="last_name"
         [(ngModel)]="student.last_name"
+        placeholder="Student last name"
       />
     </div>
     <div class="field mt-1">
@@ -166,12 +167,12 @@
       <input
         type="number"
         min="18"
-        class="my-2"
         pInputText
         id="cne"
         [(ngModel)]="student.age"
         required
         autofocus
+        placeholder="Student age"
       />
     </div>
 
@@ -179,20 +180,21 @@
       <label for="cne" class="my-2">CNE :</label>
       <input
         type="text"
-        class="my-2"
         pInputText
         id="cne"
         [(ngModel)]="student.cne"
         required
         autofocus
+        placeholder="Student cne"
       />
     </div>
     <div class="field">
-      <label for="course">Courses : </label>
+      <label for="course" class="my-2">Courses : </label>
       <p-multiSelect
         [options]="courses"
         [(ngModel)]="student.courses"
         optionLabel="name"
+        placeholder="Select courses"
       ></p-multiSelect>
     </div>
   </ng-template>

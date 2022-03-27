@@ -137,6 +137,7 @@
         [(ngModel)]="course.name"
         required
         autofocus
+        placeholder="Name of course"
       />
       <small class="p-error" *ngIf="submitted && !course.name"
         >Name is required.</small
@@ -149,15 +150,28 @@
         [(ngModel)]="course.professor"
         optionLabel="first_name"
         class="course-professor-dropdown"
+        placeholder="Select a professor"
       ></p-dropdown>
     </div>
     <div class="field">
       <label for="last_name" class="my-2">Duration : </label>
-      <input id="last_name" pInputText [(ngModel)]="course.duration" required />
+      <input
+        id="last_name"
+        pInputText
+        [(ngModel)]="course.duration"
+        required
+        placeholder="Course duration in hours"
+      />
     </div>
     <div class="field">
       <label for="grade" class="my-2">Language : </label>
-      <input id="grade" pInputText [(ngModel)]="course.language" required />
+      <input
+        id="grade"
+        pInputText
+        [(ngModel)]="course.language"
+        required
+        placeholder="Course language"
+      />
     </div>
   </ng-template>
 

@@ -1,3 +1,4 @@
+import { CourseService } from './../../services/course.service';
 import { ProfessorInterface } from './../../models/professor.model';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -21,10 +22,12 @@ export class ProfessorComponent implements OnInit {
   professorDialog: boolean = false;
   professor: Professor;
   submitted: boolean = false;
+  courses: any
 
   constructor(
     private http: HttpClient,
     private professorService: ProfessorService,
+    private courseService: CourseService,
     private messageService: MessageService,
     private primengConfig: PrimeNGConfig,
     private confirmationService: ConfirmationService
@@ -33,6 +36,7 @@ export class ProfessorComponent implements OnInit {
   ngOnInit(): void {
     this.primengConfig.ripple = true;
     this.professorService.getProfessors().subscribe(data => this.professors = data)
+    this.courseService.getCourses().subscribe((data) => this.courses = data)
   }
 
   openNew() {

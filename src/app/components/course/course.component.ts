@@ -30,12 +30,15 @@ export class CourseComponent implements OnInit {
     private primengConfig: PrimeNGConfig,
     private confirmationService: ConfirmationService
   ) {
-    this.professorService.getProfessors().subscribe((professors: Professor[]) => this.professors = professors)
+    this.professorService
+      .getProfessors()
+      .subscribe((professors: Professor[]) => (this.professors = professors));
   }
 
   ngOnInit(): void {
     this.courseService.getCourses().subscribe((data) => {
       this.courses = data;
+      console.table(data);
     });
   }
 
@@ -98,16 +101,19 @@ export class CourseComponent implements OnInit {
   saveCourse() {
     if (this.course.id) {
       this.courses[this.findIndexById(this.course.id)] = this.course;
-      this.courseService.updateCourse(this.course);
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Successful',
-        detail: 'Course Updated',
-        life: 3000,
+      console.log(this.course);
+      this.courseService.updateCourse(this.course).subscribe((data) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'Course Updated',
+          life: 3000,
+        });
       });
     } else {
       this.courseService
-        .addCourse(this.course).subscribe((data: CourseInterface) => {
+        .addCourse(this.course)
+        .subscribe((data: CourseInterface) => {
           this.courseService.getLastInsertedCourse().subscribe((data) => {
             this.courses.push(data);
             this.messageService.add({
@@ -117,7 +123,7 @@ export class CourseComponent implements OnInit {
               life: 3000,
             });
           });
-        })
+        });
     }
     this.course = new Course();
     this.courseDialog = false;
